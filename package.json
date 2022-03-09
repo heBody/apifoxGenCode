@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "name": "apifoxgencode",
+  "version": "1.0.0",
+  "description": "apifox gen code",
+  "main": "dist/node/index.js",
+  "bin": {
+    "apifox-gen": "bin/index.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heBody/apifoxGenCode.git"
+  },
+  "author": "heshuaibiao",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.70.0",
+    "rollup-plugin-esbuild": "^4.8.2",
+    "typescript": "^4.6.2"
+  }
+}
