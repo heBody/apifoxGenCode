@@ -19,11 +19,15 @@
     "build": "rimraf dist && rollup -c",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && pnpm run update-readme && git add CHANGELOG.md README.*",
     "release": "bumpp -x \"npm run changelog\" --all --tag --commit --push && npm publish",
-    "lint": "eslint --ignore-path .gitignore '**/*.ts'"
+    "lint": "eslint --ignore-path .gitignore '**/*.ts'",
+    "test": "esno src/Gen.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heBody/apifoxGenCode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/heBody/apifoxGenCode/issues"
   },
   "keywords": [
     "apifox",

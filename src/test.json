@@ -1,0 +1,5614 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "霞山",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "离职档案（basic模块）"
+    },
+    {
+      "name": "加入设置/审核设置（basic模块）"
+    },
+    {
+      "name": "导出二维码相关（basic模块）"
+    },
+    {
+      "name": "老师/教职工状态相关（basic模块）"
+    },
+    {
+      "name": "调课/代课（timetablenew模块）"
+    },
+    {
+      "name": "教学笔记（note模块）"
+    },
+    {
+      "name": "证明管理（cert模块）"
+    },
+    {
+      "name": "局端登录/重置密码（basic模块）"
+    },
+    {
+      "name": "数据上报（dataupload模块）"
+    }
+  ],
+  "paths": {
+    "/{orgId}/noteBooks/list": {
+      "get": {
+        "summary": "笔记本列表",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "noteBookId": {
+                            "type": "string",
+                            "description": "笔记本id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "笔记本名称"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "description": "用户id"
+                          },
+                          "orgId": {
+                            "type": "string",
+                            "description": "单位id"
+                          }
+                        },
+                        "required": [
+                          "noteBookId",
+                          "name",
+                          "userId",
+                          "orgId"
+                        ]
+                      }
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/addOrModifyPrizeCert": {
+      "post": {
+        "summary": "新增或修改获奖证明",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certId": {
+                    "type": "integer",
+                    "description": "证明单号，不为空就是修改",
+                    "nullable": true
+                  },
+                  "stuName": {
+                    "type": "string",
+                    "description": "学生姓名"
+                  },
+                  "sex": {
+                    "type": "integer",
+                    "description": "性别 1:男 2:女"
+                  },
+                  "idcard": {
+                    "type": "string",
+                    "description": "身份证号"
+                  },
+                  "stuGrade": {
+                    "type": "string",
+                    "description": "年级"
+                  },
+                  "stuClass": {
+                    "type": "string",
+                    "description": "班级"
+                  },
+                  "stuNo": {
+                    "type": "string",
+                    "description": "学号"
+                  },
+                  "prizeName": {
+                    "type": "string",
+                    "description": "奖项名称"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "获奖日期"
+                  },
+                  "mark": {
+                    "type": "string",
+                    "description": "奖项说明",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "certId",
+                  "stuName",
+                  "sex",
+                  "idcard",
+                  "stuGrade",
+                  "stuClass",
+                  "stuNo",
+                  "prizeName",
+                  "date",
+                  "mark"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "null"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/orgconfig/update": {
+      "post": {
+        "summary": "修改单位的加入设置和审核设置（新）",
+        "x-apifox-folder": "加入设置/审核设置（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "加入设置/审核设置（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "allowBindStudent": {
+                    "type": "integer",
+                    "description": "是否允许新家长绑定学生 1：是 0：否"
+                  },
+                  "needAudit": {
+                    "type": "integer",
+                    "description": "老师/教职工是否需要审核 1：是 0：否"
+                  }
+                },
+                "required": [
+                  "allowBindStudent",
+                  "needAudit"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/queryCertList": {
+      "get": {
+        "summary": "查询证明管理列表",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "证明类型 0:全部 1:就读证明 2:获奖证明 3:毕业证明 4:其他证明",
+            "required": true,
+            "example": "ATTEND",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stuName",
+            "in": "query",
+            "description": "名字模糊搜索",
+            "required": false,
+            "example": "张三",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "description": "页数",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "certId": {
+                                "type": "integer",
+                                "description": "证明单号"
+                              },
+                              "type": {
+                                "type": "integer",
+                                "description": "证明类型 1:就读证明 2:获奖证明 3:毕业证明 4:其他证明"
+                              },
+                              "stuName": {
+                                "type": "string",
+                                "description": "学生姓名"
+                              },
+                              "stuGrade": {
+                                "type": "string",
+                                "description": "年级"
+                              },
+                              "stuClass": {
+                                "type": "string",
+                                "description": "班级"
+                              },
+                              "stuNo": {
+                                "type": "string",
+                                "description": "学号"
+                              },
+                              "upTime": {
+                                "type": "string",
+                                "description": "更新时间"
+                              }
+                            }
+                          }
+                        },
+                        "pageNum": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "startRow": {
+                          "type": "integer"
+                        },
+                        "endRow": {
+                          "type": "integer"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        },
+                        "prePage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "isFirstPage": {
+                          "type": "string"
+                        },
+                        "isLastPage": {
+                          "type": "string"
+                        },
+                        "hasPreviousPage": {
+                          "type": "string"
+                        },
+                        "hasNextPage": {
+                          "type": "string"
+                        },
+                        "navigatePages": {
+                          "type": "integer"
+                        },
+                        "navigatepageNums": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "navigateFirstPage": {
+                          "type": "integer"
+                        },
+                        "navigateLastPage": {
+                          "type": "integer"
+                        },
+                        "firstPage": {
+                          "type": "integer"
+                        },
+                        "lastPage": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "list",
+                        "pageNum",
+                        "pageSize",
+                        "size",
+                        "startRow",
+                        "endRow",
+                        "pages",
+                        "prePage",
+                        "nextPage",
+                        "isFirstPage",
+                        "isLastPage",
+                        "hasPreviousPage",
+                        "hasNextPage",
+                        "navigatePages",
+                        "navigatepageNums",
+                        "navigateFirstPage",
+                        "navigateLastPage",
+                        "firstPage",
+                        "lastPage"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/courseadjustment/delete": {
+      "post": {
+        "summary": "删除调课/代课",
+        "x-apifox-folder": "调课/代课（timetablenew模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "调课/代课（timetablenew模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "courseAdjustmentId": {
+                    "type": "string",
+                    "description": "调课/代课记录id"
+                  }
+                },
+                "required": [
+                  "courseAdjustmentId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/school/dataupload/dataUpload": {
+      "post": {
+        "summary": "数据上报(学校端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "infoId": {
+                    "type": "integer",
+                    "description": "上报id"
+                  },
+                  "formData": {
+                    "type": "string",
+                    "description": "表单数据"
+                  }
+                },
+                "required": [
+                  "infoId",
+                  "formData"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/attachment/upload": {
+      "post": {
+        "summary": "上传笔记附件",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "description": "附件",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "description": "附件id"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/getDatauploadList": {
+      "get": {
+        "summary": "获取数据上报列表(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [
+          {
+            "name": "dataStatus",
+            "in": "query",
+            "description": "上报状态 1:未开始 2:进行中 3:已截止 其他获取不传就是拿全部",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formKey",
+            "in": "query",
+            "description": "表单key",
+            "required": false,
+            "example": "l0g54pe0jkfkre63",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "infoName",
+            "in": "query",
+            "description": "上报名称模糊查询",
+            "required": false,
+            "example": "统计",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "description": "页数",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "orgId": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "上报名称"
+                              },
+                              "per": {
+                                "type": "integer",
+                                "description": "上报频次 1:上报一次 2:每日一次"
+                              },
+                              "startTime": {
+                                "type": "string",
+                                "description": "开始时间"
+                              },
+                              "timeFlag": {
+                                "type": "integer",
+                                "description": "是否长期 1:长期 2:不长期"
+                              },
+                              "endTime": {
+                                "type": "string",
+                                "description": "结束时间",
+                                "nullable": true
+                              },
+                              "remark": {
+                                "type": "string",
+                                "description": "上报说明"
+                              },
+                              "schoolFlag": {
+                                "type": "integer"
+                              },
+                              "uploadFlag": {
+                                "type": "integer",
+                                "description": "是否重复上报 1:允许 2:不允许"
+                              },
+                              "operatorId": {
+                                "type": "string"
+                              },
+                              "operatorName": {
+                                "type": "string"
+                              },
+                              "operateTime": {
+                                "type": "string"
+                              },
+                              "creatorId": {
+                                "type": "string"
+                              },
+                              "creatorName": {
+                                "type": "string"
+                              },
+                              "createTime": {
+                                "type": "string"
+                              },
+                              "closed": {
+                                "type": "integer",
+                                "description": "是否关闭了 0:不关闭 1:关闭"
+                              },
+                              "formKey": {
+                                "type": "string",
+                                "description": "表单key"
+                              },
+                              "dataStatus": {
+                                "type": "integer",
+                                "description": "上报状态 1:未开始 2:进行中 3:已截止"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "orgId",
+                              "title",
+                              "per",
+                              "startTime",
+                              "timeFlag",
+                              "endTime",
+                              "remark",
+                              "schoolFlag",
+                              "uploadFlag",
+                              "operatorId",
+                              "operatorName",
+                              "operateTime",
+                              "creatorId",
+                              "creatorName",
+                              "createTime",
+                              "closed",
+                              "formKey",
+                              "dataStatus"
+                            ]
+                          }
+                        },
+                        "pageNum": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "startRow": {
+                          "type": "integer"
+                        },
+                        "endRow": {
+                          "type": "integer"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        },
+                        "prePage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "isFirstPage": {
+                          "type": "string"
+                        },
+                        "isLastPage": {
+                          "type": "string"
+                        },
+                        "hasPreviousPage": {
+                          "type": "string"
+                        },
+                        "hasNextPage": {
+                          "type": "string"
+                        },
+                        "navigatePages": {
+                          "type": "integer"
+                        },
+                        "navigatepageNums": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "navigateFirstPage": {
+                          "type": "integer"
+                        },
+                        "navigateLastPage": {
+                          "type": "integer"
+                        },
+                        "firstPage": {
+                          "type": "integer"
+                        },
+                        "lastPage": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "list",
+                        "pageNum",
+                        "pageSize",
+                        "size",
+                        "startRow",
+                        "endRow",
+                        "pages",
+                        "prePage",
+                        "nextPage",
+                        "isFirstPage",
+                        "isLastPage",
+                        "hasPreviousPage",
+                        "hasNextPage",
+                        "navigatePages",
+                        "navigatepageNums",
+                        "navigateFirstPage",
+                        "navigateLastPage",
+                        "firstPage",
+                        "lastPage"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/teacher/get/{userId}": {
+      "get": {
+        "summary": "获取老师详情",
+        "x-apifox-folder": "离职档案（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "离职档案（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deptIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "leaveArchives": {
+                      "type": "object",
+                      "properties": {
+                        "leaveTime": {
+                          "type": "string",
+                          "description": "离职时间"
+                        },
+                        "leaveReason": {
+                          "type": "string",
+                          "description": "离职原因"
+                        },
+                        "attachmentId": {
+                          "type": "integer",
+                          "description": "附件id"
+                        },
+                        "attachmentName": {
+                          "type": "string",
+                          "description": "附件名称"
+                        }
+                      },
+                      "required": [
+                        "leaveTime",
+                        "leaveReason",
+                        "attachmentId",
+                        "attachmentName"
+                      ],
+                      "description": "离职档案"
+                    },
+                    "userId": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sex": {
+                      "type": "integer"
+                    },
+                    "nickName": {
+                      "type": "string"
+                    },
+                    "mobilePhone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "idCard": {
+                      "type": "string"
+                    },
+                    "bh": {
+                      "type": "string"
+                    },
+                    "passwd": {
+                      "type": "string"
+                    },
+                    "largePhoto": {
+                      "type": "integer"
+                    },
+                    "mediumPhoto": {
+                      "type": "integer"
+                    },
+                    "smallPhoto": {
+                      "type": "integer"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "老师状态 0：正常 1：已离职 2：待审核 9：冻结"
+                    }
+                  },
+                  "required": [
+                    "deptIds",
+                    "leaveArchives",
+                    "userId",
+                    "name",
+                    "sex",
+                    "nickName",
+                    "mobilePhone",
+                    "email",
+                    "idCard",
+                    "bh",
+                    "passwd",
+                    "largePhoto",
+                    "mediumPhoto",
+                    "smallPhoto",
+                    "birthday",
+                    "status"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/attachment/download": {
+      "get": {
+        "summary": "下载离职档案附件",
+        "x-apifox-folder": "离职档案（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "离职档案（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileId",
+            "in": "query",
+            "description": "附件id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/list": {
+      "get": {
+        "summary": "笔记列表",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteBookId",
+            "in": "query",
+            "description": "所属笔记本id 不传则查全部 0代表默认笔记本",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchStr",
+            "in": "query",
+            "description": "模糊搜索笔记标题",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "noteId": {
+                                "type": "string",
+                                "description": "笔记id"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "标题"
+                              },
+                              "content": {
+                                "type": "string",
+                                "description": "内容"
+                              },
+                              "attachment": {
+                                "type": "string",
+                                "description": "附件，json数组，如[{\"id\":123, \"name\": \"xxx\"}]"
+                              },
+                              "userId": {
+                                "type": "string",
+                                "description": "用户id"
+                              },
+                              "orgId": {
+                                "type": "string",
+                                "description": "单位id"
+                              },
+                              "noteBookId": {
+                                "type": "string",
+                                "description": "笔记本id"
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "description": "更新时间"
+                              },
+                              "noteBookName": {
+                                "type": "string",
+                                "description": "笔记本名称"
+                              }
+                            },
+                            "required": [
+                              "noteId",
+                              "title",
+                              "content",
+                              "attachment",
+                              "userId",
+                              "orgId",
+                              "noteBookId",
+                              "updateTime",
+                              "noteBookName"
+                            ]
+                          }
+                        },
+                        "pageNum": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "startRow": {
+                          "type": "integer"
+                        },
+                        "endRow": {
+                          "type": "integer"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        },
+                        "prePage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "isFirstPage": {
+                          "type": "string"
+                        },
+                        "isLastPage": {
+                          "type": "string"
+                        },
+                        "hasPreviousPage": {
+                          "type": "string"
+                        },
+                        "hasNextPage": {
+                          "type": "string"
+                        },
+                        "navigatePages": {
+                          "type": "integer"
+                        },
+                        "navigatepageNums": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "navigateFirstPage": {
+                          "type": "integer"
+                        },
+                        "navigateLastPage": {
+                          "type": "integer"
+                        },
+                        "lastPage": {
+                          "type": "integer"
+                        },
+                        "firstPage": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "list",
+                        "pageNum",
+                        "pageSize",
+                        "size",
+                        "startRow",
+                        "endRow",
+                        "pages",
+                        "prePage",
+                        "nextPage",
+                        "isFirstPage",
+                        "isLastPage",
+                        "hasPreviousPage",
+                        "hasNextPage",
+                        "navigatePages",
+                        "navigatepageNums",
+                        "navigateFirstPage",
+                        "navigateLastPage",
+                        "lastPage",
+                        "firstPage"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/orgconfig/get": {
+      "get": {
+        "summary": "获取单位的加入设置和审核设置（新）",
+        "x-apifox-folder": "加入设置/审核设置（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "加入设置/审核设置（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "allowBindStudent": {
+                      "type": "integer",
+                      "description": "是否允许新家长绑定学生 1：是 0：否"
+                    },
+                    "needAudit": {
+                      "type": "integer",
+                      "description": "老师/教职工是否需要审核 1：是 0：否"
+                    }
+                  },
+                  "required": [
+                    "allowBindStudent",
+                    "needAudit"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/queryTypeList": {
+      "get": {
+        "summary": "查询类型列表",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "type"
+                        ]
+                      }
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/noteBooks/add": {
+      "post": {
+        "summary": "新增笔记本",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "笔记本名称"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/noteBooks/delete/{noteBookId}": {
+      "post": {
+        "summary": "删除笔记本",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteBookId",
+            "in": "path",
+            "description": "笔记本Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/teacher/updateStatus": {
+      "post": {
+        "summary": "修改老师状态（新）",
+        "x-apifox-folder": "老师/教职工状态相关（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "老师/教职工状态相关（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "老师id"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "新状态 0：正常 1：已离职 2：待审核 9：冻结"
+                  }
+                },
+                "required": [
+                  "userId",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/attachment/download": {
+      "get": {
+        "summary": "下载笔记附件",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileId",
+            "in": "query",
+            "description": "附件id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "description": "附件id"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/addUpload": {
+      "post": {
+        "summary": "新增数据上报(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "formKey": {
+                    "type": "string",
+                    "description": "表单key"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "上报名称"
+                  },
+                  "per": {
+                    "type": "integer",
+                    "description": "上报频次 1:上报一次 2:每日一次"
+                  },
+                  "startTime": {
+                    "type": "string",
+                    "description": "开始时间"
+                  },
+                  "timeFlag": {
+                    "type": "integer",
+                    "description": "是否长期 1:长期 2:不长期"
+                  },
+                  "endTime": {
+                    "type": "string",
+                    "description": "结束时间",
+                    "nullable": true
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "上报说明"
+                  },
+                  "schoolFlag": {
+                    "type": "integer",
+                    "description": "是否全部学校 1:全部 2:不全部"
+                  },
+                  "schoolList": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "orgId": {
+                          "type": "integer",
+                          "description": "学校id",
+                          "mock": {
+                            "mock": "10086"
+                          }
+                        },
+                        "orgName": {
+                          "type": "string",
+                          "description": "学校name",
+                          "mock": {
+                            "mock": "10086学校"
+                          }
+                        }
+                      }
+                    },
+                    "description": "选择的学校，如果是全部，这里可以为空",
+                    "nullable": true
+                  },
+                  "uploadFlag": {
+                    "type": "integer",
+                    "description": "是否重复上报 1:允许 2:不允许"
+                  },
+                  "configList": {
+                    "type": "object",
+                    "properties": {
+                      "l0g53mazm2c4bnm6": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "l0g53mazm2c4bnm6"
+                    ],
+                    "description": "表单事先设定值配置"
+                  }
+                },
+                "required": [
+                  "formKey",
+                  "title",
+                  "per",
+                  "startTime",
+                  "timeFlag",
+                  "remark",
+                  "schoolFlag",
+                  "schoolList",
+                  "uploadFlag",
+                  "configList",
+                  "endTime"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "null"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/courseadjustment/list": {
+      "get": {
+        "summary": "查询调课/代课列表",
+        "x-apifox-folder": "调课/代课（timetablenew模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "调课/代课（timetablenew模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "类型 1：节假日调课 2：日常调课 3：日常代课 0：全部类型  ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courseAdjustmentId": {
+                      "type": "integer",
+                      "description": "记录id"
+                    },
+                    "orgId": {
+                      "type": "integer",
+                      "description": "单位id"
+                    },
+                    "gradeId": {
+                      "type": "integer",
+                      "description": "年级id"
+                    },
+                    "gradeName": {
+                      "type": "string",
+                      "description": "年级名称"
+                    },
+                    "classId": {
+                      "type": "integer",
+                      "description": "班级id"
+                    },
+                    "className": {
+                      "type": "string",
+                      "description": "班级名称"
+                    },
+                    "teacherId": {
+                      "type": "integer",
+                      "description": "老师id"
+                    },
+                    "teacherName": {
+                      "type": "string",
+                      "description": "老师名称"
+                    },
+                    "type": {
+                      "type": "integer",
+                      "description": "类型 1：节假日调课 2：日常调课 3：日常代课"
+                    },
+                    "adjustTime": {
+                      "type": "string",
+                      "description": "被调日期"
+                    },
+                    "adjustSection": {
+                      "type": "string",
+                      "description": "被调课时，多个课时用、隔开"
+                    },
+                    "teachTime": {
+                      "type": "string",
+                      "description": "授课日期"
+                    },
+                    "teachSection": {
+                      "type": "string",
+                      "description": "授课课时，多个课时用、隔开"
+                    },
+                    "updateTime": {
+                      "type": "string",
+                      "description": "更新时间"
+                    }
+                  },
+                  "required": [
+                    "courseAdjustmentId",
+                    "orgId",
+                    "gradeId",
+                    "gradeName",
+                    "classId",
+                    "className",
+                    "teacherId",
+                    "teacherName",
+                    "type",
+                    "adjustTime",
+                    "adjustSection",
+                    "teachTime",
+                    "teachSection",
+                    "updateTime"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/school/dataupload/getFormEdit": {
+      "get": {
+        "summary": "获取表单编辑信息(学校端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [
+          {
+            "name": "infoId",
+            "in": "query",
+            "description": "上报id",
+            "required": true,
+            "example": "685581639035674625",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "formData": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "tip": {
+                                    "type": "string"
+                                  },
+                                  "isUp": {
+                                    "type": "integer"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "null"
+                                  },
+                                  "format": {
+                                    "type": "string"
+                                  },
+                                  "express": {
+                                    "type": "null"
+                                  },
+                                  "options": {
+                                    "type": "null"
+                                  },
+                                  "printed": {
+                                    "type": "integer"
+                                  },
+                                  "children": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "isMultip": {
+                                    "type": "integer"
+                                  },
+                                  "required": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "key",
+                                  "tip",
+                                  "isUp",
+                                  "name",
+                                  "type",
+                                  "value",
+                                  "format",
+                                  "express",
+                                  "options",
+                                  "printed",
+                                  "children",
+                                  "isMultip",
+                                  "required"
+                                ]
+                              }
+                            },
+                            "empty": {
+                              "type": "string"
+                            },
+                            "present": {
+                              "type": "string"
+                            },
+                            "notEmpty": {
+                              "type": "string"
+                            },
+                            "notPresent": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "empty",
+                            "present",
+                            "notEmpty",
+                            "notPresent"
+                          ]
+                        },
+                        "configList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "elementKey": {
+                                "type": "string",
+                                "description": "表单元素id"
+                              },
+                              "kind": {
+                                "type": "integer",
+                                "description": "/**      * 动态逻辑值含义：      * 0:默认，无逻辑      * 1:表示学校名称自动填写      * 2:表示多学段，需要自动列举      * 3:表示学年，实际表示 n-1 ~ n 学年      */"
+                              },
+                              "preset": {
+                                "type": "integer",
+                                "description": "发起上报时是否需要事先设定 1是 0否"
+                              },
+                              "presetTitle": {
+                                "type": "string",
+                                "description": "事先设定的标题",
+                                "nullable": true
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "元素输入类型"
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ]
+                          },
+                          "description": "元素配置列表"
+                        }
+                      },
+                      "required": [
+                        "formData",
+                        "configList"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/teacher/modify": {
+      "post": {
+        "summary": "修改老师",
+        "x-apifox-folder": "离职档案（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "离职档案（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deptIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "gradeIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "subjectCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "leaveArchives": {
+                    "type": "object",
+                    "properties": {
+                      "leaveTime": {
+                        "type": "string",
+                        "description": "离职时间"
+                      },
+                      "leaveReason": {
+                        "type": "string",
+                        "description": "离职原因"
+                      },
+                      "attachmentId": {
+                        "type": "integer",
+                        "description": "附件id"
+                      },
+                      "attachmentName": {
+                        "type": "string",
+                        "description": "附件名称"
+                      }
+                    },
+                    "required": [
+                      "leaveTime",
+                      "leaveReason",
+                      "attachmentId",
+                      "attachmentName"
+                    ],
+                    "description": "离职档案"
+                  },
+                  "officePhone": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "integer"
+                  },
+                  "nickName": {
+                    "type": "string"
+                  },
+                  "mobilePhone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "idCard": {
+                    "type": "string"
+                  },
+                  "bh": {
+                    "type": "string"
+                  },
+                  "passwd": {
+                    "type": "string"
+                  },
+                  "largePhoto": {
+                    "type": "integer"
+                  },
+                  "mediumPhoto": {
+                    "type": "integer"
+                  },
+                  "smallPhoto": {
+                    "type": "integer"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "deptIds",
+                  "gradeIds",
+                  "subjectCodes",
+                  "leaveArchives",
+                  "officePhone",
+                  "userId",
+                  "name",
+                  "sex",
+                  "nickName",
+                  "mobilePhone",
+                  "email",
+                  "idCard",
+                  "bh",
+                  "passwd",
+                  "largePhoto",
+                  "mediumPhoto",
+                  "smallPhoto",
+                  "birthday"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/courseadjustment/add": {
+      "post": {
+        "summary": "新增调课/代课",
+        "x-apifox-folder": "调课/代课（timetablenew模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "调课/代课（timetablenew模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "gradeId": {
+                    "type": "integer",
+                    "description": "年级id"
+                  },
+                  "gradeName": {
+                    "type": "string",
+                    "description": "年级名称"
+                  },
+                  "classId": {
+                    "type": "integer",
+                    "description": "班级id"
+                  },
+                  "className": {
+                    "type": "string",
+                    "description": "班级名称"
+                  },
+                  "teacherId": {
+                    "type": "integer",
+                    "description": "老师id"
+                  },
+                  "teacherName": {
+                    "type": "string",
+                    "description": "老师名称"
+                  },
+                  "type": {
+                    "type": "integer",
+                    "description": "类型 1：节假日调课 2：日常调课 3：日常代课"
+                  },
+                  "adjustTime": {
+                    "type": "string",
+                    "description": "被调日期；如果是代课，则不用传"
+                  },
+                  "adjustSection": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "被调课时；如果是代课，则不用传"
+                  },
+                  "teachTime": {
+                    "type": "string",
+                    "description": "授课日期"
+                  },
+                  "teachSection": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "授课课时"
+                  }
+                },
+                "required": [
+                  "gradeId",
+                  "gradeName",
+                  "classId",
+                  "className",
+                  "teacherId",
+                  "teacherName",
+                  "type",
+                  "teachTime",
+                  "teachSection"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/addOrModifyGraduateCert": {
+      "post": {
+        "summary": "新增或修改毕业证明",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certId": {
+                    "type": "integer",
+                    "description": "证明单号，不为空就是修改",
+                    "nullable": true
+                  },
+                  "stuName": {
+                    "type": "string",
+                    "description": "学生姓名"
+                  },
+                  "sex": {
+                    "type": "integer",
+                    "description": "性别 1:男 2:女"
+                  },
+                  "idcard": {
+                    "type": "string",
+                    "description": "身份证号"
+                  },
+                  "stuGrade": {
+                    "type": "string",
+                    "description": "年级"
+                  },
+                  "stuClass": {
+                    "type": "string",
+                    "description": "班级"
+                  },
+                  "stuNo": {
+                    "type": "string",
+                    "description": "学号"
+                  },
+                  "schoolName": {
+                    "type": "string",
+                    "description": "毕业学校",
+                    "nullable": true
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "毕业日期"
+                  },
+                  "mark": {
+                    "type": "string",
+                    "description": "毕业说明",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "certId",
+                  "stuName",
+                  "sex",
+                  "idcard",
+                  "stuGrade",
+                  "stuClass",
+                  "stuNo",
+                  "schoolName",
+                  "date",
+                  "mark"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "null"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/worker/update": {
+      "post": {
+        "summary": "修改教职工",
+        "x-apifox-folder": "离职档案（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "离职档案（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deptIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "leaveArchives": {
+                    "type": "object",
+                    "properties": {
+                      "leaveTime": {
+                        "type": "string",
+                        "description": "离职时间"
+                      },
+                      "leaveReason": {
+                        "type": "string",
+                        "description": "离职原因"
+                      },
+                      "attachmentId": {
+                        "type": "integer",
+                        "description": "附件id"
+                      },
+                      "attachmentName": {
+                        "type": "string",
+                        "description": "附件名称"
+                      }
+                    },
+                    "required": [
+                      "leaveTime",
+                      "leaveReason",
+                      "attachmentId",
+                      "attachmentName"
+                    ],
+                    "description": "离职档案"
+                  },
+                  "userId": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "integer"
+                  },
+                  "nickName": {
+                    "type": "string"
+                  },
+                  "mobilePhone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "idCard": {
+                    "type": "string"
+                  },
+                  "bh": {
+                    "type": "string"
+                  },
+                  "passwd": {
+                    "type": "string"
+                  },
+                  "largePhoto": {
+                    "type": "integer"
+                  },
+                  "mediumPhoto": {
+                    "type": "integer"
+                  },
+                  "smallPhoto": {
+                    "type": "integer"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "deptIds",
+                  "leaveArchives",
+                  "userId",
+                  "name",
+                  "sex",
+                  "nickName",
+                  "mobilePhone",
+                  "email",
+                  "idCard",
+                  "bh",
+                  "passwd",
+                  "largePhoto",
+                  "mediumPhoto",
+                  "smallPhoto",
+                  "birthday"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/workder/updateStatus": {
+      "post": {
+        "summary": "修改教职工状态（新）",
+        "x-apifox-folder": "老师/教职工状态相关（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "老师/教职工状态相关（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "教职工id"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "新状态 0：正常 1：已离职 2：待审核 9：冻结"
+                  }
+                },
+                "required": [
+                  "userId",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/addOrModifyOtherCert": {
+      "post": {
+        "summary": "新增或修改其他证明",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certId": {
+                    "type": "integer",
+                    "description": "证明单号，不为空就是修改",
+                    "nullable": true
+                  },
+                  "stuName": {
+                    "type": "string",
+                    "description": "学生姓名"
+                  },
+                  "sex": {
+                    "type": "integer",
+                    "description": "性别 1:男 2:女"
+                  },
+                  "idcard": {
+                    "type": "string",
+                    "description": "身份证号"
+                  },
+                  "stuGrade": {
+                    "type": "string",
+                    "description": "年级"
+                  },
+                  "stuClass": {
+                    "type": "string",
+                    "description": "班级"
+                  },
+                  "stuNo": {
+                    "type": "string",
+                    "description": "学号"
+                  },
+                  "mark": {
+                    "type": "string",
+                    "description": "证明内容",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "certId",
+                  "stuName",
+                  "sex",
+                  "idcard",
+                  "stuGrade",
+                  "stuClass",
+                  "stuNo",
+                  "mark"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "null"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/worker/list/{pageSize}/{pageNumber}": {
+      "get": {
+        "summary": "查询教职工列表",
+        "x-apifox-folder": "老师/教职工状态相关（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "老师/教职工状态相关（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deptIds": {
+                      "type": "string"
+                    },
+                    "deptNames": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "老师状态 0：正常 1：已离职 2：待审核 9：冻结"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "orgId": {
+                      "type": "integer"
+                    },
+                    "uname": {
+                      "type": "string"
+                    },
+                    "passwd": {
+                      "type": "string"
+                    },
+                    "salt": {
+                      "type": "string"
+                    },
+                    "mobilePhone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "lastLoginTime": {
+                      "type": "string"
+                    },
+                    "lastUpdatePasswdTime": {
+                      "type": "string"
+                    },
+                    "lock": {
+                      "type": "integer"
+                    },
+                    "idCard": {
+                      "type": "string"
+                    },
+                    "userType": {
+                      "type": "integer"
+                    },
+                    "bh": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sex": {
+                      "type": "integer"
+                    },
+                    "nickName": {
+                      "type": "string"
+                    },
+                    "initial": {
+                      "type": "string"
+                    },
+                    "isDel": {
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "type": "integer"
+                    },
+                    "defaultPassword": {
+                      "type": "integer"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "encodeFlag": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "deptIds",
+                    "deptNames",
+                    "status",
+                    "id",
+                    "orgId",
+                    "uname",
+                    "passwd",
+                    "salt",
+                    "mobilePhone",
+                    "email",
+                    "lastLoginTime",
+                    "lastUpdatePasswdTime",
+                    "lock",
+                    "idCard",
+                    "userType",
+                    "bh",
+                    "name",
+                    "sex",
+                    "nickName",
+                    "initial",
+                    "isDel",
+                    "sort",
+                    "defaultPassword",
+                    "birthday",
+                    "encodeFlag"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/teacher/list/{pageSize}/{pageNumber}": {
+      "get": {
+        "summary": "查询老师列表",
+        "x-apifox-folder": "老师/教职工状态相关（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "老师/教职工状态相关（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deptIds": {
+                      "type": "string"
+                    },
+                    "deptNames": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "老师状态 0：正常 1：已离职 2：待审核 9：冻结"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "orgId": {
+                      "type": "integer"
+                    },
+                    "uname": {
+                      "type": "string"
+                    },
+                    "passwd": {
+                      "type": "string"
+                    },
+                    "salt": {
+                      "type": "string"
+                    },
+                    "mobilePhone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "lastLoginTime": {
+                      "type": "string"
+                    },
+                    "lastUpdatePasswdTime": {
+                      "type": "string"
+                    },
+                    "lock": {
+                      "type": "integer"
+                    },
+                    "idCard": {
+                      "type": "string"
+                    },
+                    "userType": {
+                      "type": "integer"
+                    },
+                    "bh": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sex": {
+                      "type": "integer"
+                    },
+                    "nickName": {
+                      "type": "string"
+                    },
+                    "initial": {
+                      "type": "string"
+                    },
+                    "isDel": {
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "type": "integer"
+                    },
+                    "defaultPassword": {
+                      "type": "integer"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "encodeFlag": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "deptIds",
+                    "deptNames",
+                    "status",
+                    "id",
+                    "orgId",
+                    "uname",
+                    "passwd",
+                    "salt",
+                    "mobilePhone",
+                    "email",
+                    "lastLoginTime",
+                    "lastUpdatePasswdTime",
+                    "lock",
+                    "idCard",
+                    "userType",
+                    "bh",
+                    "name",
+                    "sex",
+                    "nickName",
+                    "initial",
+                    "isDel",
+                    "sort",
+                    "defaultPassword",
+                    "birthday",
+                    "encodeFlag"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/attachment/upload": {
+      "post": {
+        "summary": "上传离职档案附件",
+        "x-apifox-folder": "离职档案（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "离职档案（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "description": "附件",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/getFormEdit": {
+      "get": {
+        "summary": "获取表单编辑信息(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [
+          {
+            "name": "formKey",
+            "in": "query",
+            "description": "表单key",
+            "required": true,
+            "example": "l0g54pe0jkfkre63",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "formData": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "tip": {
+                                    "type": "string"
+                                  },
+                                  "isUp": {
+                                    "type": "integer"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "null"
+                                  },
+                                  "format": {
+                                    "type": "string"
+                                  },
+                                  "express": {
+                                    "type": "null"
+                                  },
+                                  "options": {
+                                    "type": "null"
+                                  },
+                                  "printed": {
+                                    "type": "integer"
+                                  },
+                                  "children": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "isMultip": {
+                                    "type": "integer"
+                                  },
+                                  "required": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "key",
+                                  "tip",
+                                  "isUp",
+                                  "name",
+                                  "type",
+                                  "value",
+                                  "format",
+                                  "express",
+                                  "options",
+                                  "printed",
+                                  "children",
+                                  "isMultip",
+                                  "required"
+                                ]
+                              }
+                            },
+                            "empty": {
+                              "type": "string"
+                            },
+                            "present": {
+                              "type": "string"
+                            },
+                            "notEmpty": {
+                              "type": "string"
+                            },
+                            "notPresent": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "empty",
+                            "present",
+                            "notEmpty",
+                            "notPresent"
+                          ]
+                        },
+                        "configList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "elementKey": {
+                                "type": "string",
+                                "description": "表单元素id"
+                              },
+                              "kind": {
+                                "type": "integer",
+                                "description": "/**      * 动态逻辑值含义：      * 0:默认，无逻辑      * 1:表示学校名称自动填写      * 2:表示多学段，需要自动列举      * 3:表示学年，实际表示 n-1 ~ n 学年      */"
+                              },
+                              "preset": {
+                                "type": "integer",
+                                "description": "发起上报时是否需要事先设定 1是 0否"
+                              },
+                              "presetTitle": {
+                                "type": "string",
+                                "description": "事先设定的标题",
+                                "nullable": true
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "元素输入类型"
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ]
+                          },
+                          "description": "元素配置列表"
+                        }
+                      },
+                      "required": [
+                        "formData",
+                        "configList"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/teacher/listForQRCode/{pageSize}/{pageNumber}": {
+      "get": {
+        "summary": "查询老师列表（导出二维码页面）（新）",
+        "x-apifox-folder": "导出二维码相关（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "导出二维码相关（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deptIds": {
+                      "type": "string"
+                    },
+                    "deptNames": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "老师状态 0：正常 1：已离职 2：待审核 9：冻结"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "orgId": {
+                      "type": "integer"
+                    },
+                    "uname": {
+                      "type": "string"
+                    },
+                    "passwd": {
+                      "type": "string"
+                    },
+                    "salt": {
+                      "type": "string"
+                    },
+                    "mobilePhone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "lastLoginTime": {
+                      "type": "string"
+                    },
+                    "lastUpdatePasswdTime": {
+                      "type": "string"
+                    },
+                    "lock": {
+                      "type": "integer"
+                    },
+                    "idCard": {
+                      "type": "string"
+                    },
+                    "userType": {
+                      "type": "integer"
+                    },
+                    "bh": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sex": {
+                      "type": "integer"
+                    },
+                    "nickName": {
+                      "type": "string"
+                    },
+                    "initial": {
+                      "type": "string"
+                    },
+                    "isDel": {
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "type": "integer"
+                    },
+                    "defaultPassword": {
+                      "type": "integer"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "encodeFlag": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "deptIds",
+                    "deptNames",
+                    "status",
+                    "id",
+                    "orgId",
+                    "uname",
+                    "passwd",
+                    "salt",
+                    "mobilePhone",
+                    "email",
+                    "lastLoginTime",
+                    "lastUpdatePasswdTime",
+                    "lock",
+                    "idCard",
+                    "userType",
+                    "bh",
+                    "name",
+                    "sex",
+                    "nickName",
+                    "initial",
+                    "isDel",
+                    "sort",
+                    "defaultPassword",
+                    "birthday",
+                    "encodeFlag"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/updateDataClose": {
+      "post": {
+        "summary": "关闭此上报(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "infoId": {
+                    "type": "integer",
+                    "description": "上报id"
+                  }
+                },
+                "required": [
+                  "infoId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/getFormGeneralList": {
+      "get": {
+        "summary": "获取数据上报类型(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "表单key"
+                          },
+                          "desc": {
+                            "type": "string",
+                            "description": "数据表单类型"
+                          }
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/workder/get/{userId}": {
+      "get": {
+        "summary": "获取教职工详情",
+        "x-apifox-folder": "离职档案（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "离职档案（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deptIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "leaveArchives": {
+                      "type": "object",
+                      "properties": {
+                        "leaveTime": {
+                          "type": "string",
+                          "description": "离职时间"
+                        },
+                        "leaveReason": {
+                          "type": "string",
+                          "description": "离职原因"
+                        },
+                        "attachmentId": {
+                          "type": "integer",
+                          "description": "附件id"
+                        },
+                        "attachmentName": {
+                          "type": "string",
+                          "description": "附件名称"
+                        }
+                      },
+                      "required": [
+                        "leaveTime",
+                        "leaveReason",
+                        "attachmentId",
+                        "attachmentName"
+                      ],
+                      "description": "离职档案"
+                    },
+                    "userId": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sex": {
+                      "type": "integer"
+                    },
+                    "nickName": {
+                      "type": "string"
+                    },
+                    "mobilePhone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "idCard": {
+                      "type": "string"
+                    },
+                    "bh": {
+                      "type": "string"
+                    },
+                    "passwd": {
+                      "type": "string"
+                    },
+                    "largePhoto": {
+                      "type": "integer"
+                    },
+                    "mediumPhoto": {
+                      "type": "integer"
+                    },
+                    "smallPhoto": {
+                      "type": "integer"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "教职工状态 0：正常 1：已离职 2：待审核 9：冻结"
+                    }
+                  },
+                  "required": [
+                    "deptIds",
+                    "leaveArchives",
+                    "userId",
+                    "name",
+                    "sex",
+                    "nickName",
+                    "mobilePhone",
+                    "email",
+                    "idCard",
+                    "bh",
+                    "passwd",
+                    "largePhoto",
+                    "mediumPhoto",
+                    "smallPhoto",
+                    "birthday",
+                    "status"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkVerifyCode": {
+      "get": {
+        "summary": "校验验证码",
+        "x-apifox-folder": "局端登录/重置密码（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "局端登录/重置密码（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "description": "手机号码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "verifyCode",
+            "in": "query",
+            "description": "验证码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/student/listForQRCode/{pageSize}/{pageNumber}": {
+      "get": {
+        "summary": "查询学生列表（导出二维码页面）（新）",
+        "x-apifox-folder": "导出二维码相关（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "导出二维码相关（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gradeId": {
+                      "type": "integer"
+                    },
+                    "gradeName": {
+                      "type": "string"
+                    },
+                    "classId": {
+                      "type": "integer"
+                    },
+                    "className": {
+                      "type": "string"
+                    },
+                    "examNo": {
+                      "type": "string"
+                    },
+                    "studentCode": {
+                      "type": "string"
+                    },
+                    "isStay": {
+                      "type": "integer"
+                    },
+                    "relation": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "orgId": {
+                      "type": "integer"
+                    },
+                    "uname": {
+                      "type": "string"
+                    },
+                    "passwd": {
+                      "type": "string"
+                    },
+                    "salt": {
+                      "type": "string"
+                    },
+                    "mobilePhone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "lastLoginTime": {
+                      "type": "string"
+                    },
+                    "lastUpdatePasswdTime": {
+                      "type": "string"
+                    },
+                    "lock": {
+                      "type": "integer"
+                    },
+                    "idCard": {
+                      "type": "string"
+                    },
+                    "userType": {
+                      "type": "integer"
+                    },
+                    "bh": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sex": {
+                      "type": "integer"
+                    },
+                    "nickName": {
+                      "type": "string"
+                    },
+                    "initial": {
+                      "type": "string"
+                    },
+                    "isDel": {
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "type": "integer"
+                    },
+                    "defaultPassword": {
+                      "type": "integer"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "encodeFlag": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "gradeId",
+                    "gradeName",
+                    "classId",
+                    "className",
+                    "examNo",
+                    "studentCode",
+                    "isStay",
+                    "relation",
+                    "id",
+                    "orgId",
+                    "uname",
+                    "passwd",
+                    "salt",
+                    "mobilePhone",
+                    "email",
+                    "lastLoginTime",
+                    "lastUpdatePasswdTime",
+                    "lock",
+                    "idCard",
+                    "userType",
+                    "bh",
+                    "name",
+                    "sex",
+                    "nickName",
+                    "initial",
+                    "isDel",
+                    "sort",
+                    "defaultPassword",
+                    "birthday",
+                    "encodeFlag"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resetPwd": {
+      "post": {
+        "summary": "重置密码",
+        "x-apifox-folder": "局端登录/重置密码（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "局端登录/重置密码（basic模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "手机号码"
+                  },
+                  "verifyCode": {
+                    "type": "string",
+                    "description": "验证码"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "新密码"
+                  }
+                },
+                "required": [
+                  "phoneNumber",
+                  "verifyCode",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/officeLogin": {
+      "get": {
+        "summary": "局端登录",
+        "x-apifox-folder": "局端登录/重置密码（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "局端登录/重置密码（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "用户名；用\"6789abcdef012345\"进行AES加密后再传给后台",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "密码；用\"6789abcdef012345\"进行AES加密后再传给后台",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "remember",
+            "in": "query",
+            "description": "是否记住我；0：否 1：是；默认0",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "orgId": {
+                          "type": "string"
+                        },
+                        "orgName": {
+                          "type": "string"
+                        },
+                        "userType": {
+                          "type": "integer"
+                        },
+                        "loginUserExt": {
+                          "type": "null"
+                        },
+                        "loginType": {
+                          "type": "string"
+                        },
+                        "orgLevel": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "userId",
+                        "name",
+                        "orgId",
+                        "orgName",
+                        "userType",
+                        "loginUserExt",
+                        "loginType",
+                        "orgLevel"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例",
+                    "value": {
+                      "context": null,
+                      "status": 200,
+                      "message": {
+                        "userId": "489741524679000064",
+                        "name": "信息管理员",
+                        "orgId": "489025340581085184",
+                        "orgName": "霞山测试学校",
+                        "userType": 1,
+                        "loginUserExt": null,
+                        "loginType": "WEB",
+                        "orgLevel": 1
+                      },
+                      "error": null,
+                      "timestamp": "1646358159339"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/noteBooks/update": {
+      "post": {
+        "summary": "修改笔记本",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "笔记本名称"
+                  },
+                  "noteBookId": {
+                    "type": "integer",
+                    "description": "笔记本id"
+                  }
+                },
+                "required": [
+                  "name",
+                  "noteBookId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/infoDetail": {
+      "get": {
+        "summary": "获取数据上报详情(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [
+          {
+            "name": "infoId",
+            "in": "query",
+            "description": "上报id",
+            "required": true,
+            "example": "685581639035674625",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "orgId": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "上报名称"
+                        },
+                        "per": {
+                          "type": "integer",
+                          "description": "上报频次 1:上报一次 2:每日一次"
+                        },
+                        "startTime": {
+                          "type": "string",
+                          "description": "开始时间"
+                        },
+                        "timeFlag": {
+                          "type": "integer",
+                          "description": "是否长期 1:长期 2:不长期"
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "结束时间"
+                        },
+                        "remark": {
+                          "type": "string",
+                          "description": "上报说明"
+                        },
+                        "schoolFlag": {
+                          "type": "integer"
+                        },
+                        "uploadFlag": {
+                          "type": "integer",
+                          "description": "是否重复上报 1:允许 2:不允许"
+                        },
+                        "operatorId": {
+                          "type": "string"
+                        },
+                        "operatorName": {
+                          "type": "string"
+                        },
+                        "operateTime": {
+                          "type": "string"
+                        },
+                        "creatorId": {
+                          "type": "string"
+                        },
+                        "creatorName": {
+                          "type": "string"
+                        },
+                        "createTime": {
+                          "type": "string"
+                        },
+                        "closed": {
+                          "type": "integer"
+                        },
+                        "formKey": {
+                          "type": "string",
+                          "description": "表单key"
+                        },
+                        "dataStatus": {
+                          "type": "null"
+                        },
+                        "schoolNum": {
+                          "type": "integer",
+                          "description": "学校范围"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "orgId",
+                        "title",
+                        "per",
+                        "startTime",
+                        "timeFlag",
+                        "endTime",
+                        "remark",
+                        "schoolFlag",
+                        "uploadFlag",
+                        "operatorId",
+                        "operatorName",
+                        "operateTime",
+                        "creatorId",
+                        "creatorName",
+                        "createTime",
+                        "closed",
+                        "formKey",
+                        "dataStatus",
+                        "schoolNum"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/org/dataupload/getRecordList": {
+      "get": {
+        "summary": "获取数据上报记录列表(局端)",
+        "x-apifox-folder": "数据上报（dataupload模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据上报（dataupload模块）"
+        ],
+        "parameters": [
+          {
+            "name": "infoId",
+            "in": "query",
+            "description": "上报id",
+            "required": true,
+            "example": "685581639035674625",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "description": "页数",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "infoId": {
+                                "type": "string"
+                              },
+                              "orgId": {
+                                "type": "string",
+                                "description": "学校orgId"
+                              },
+                              "orgName": {
+                                "type": "string",
+                                "description": "学校orgName"
+                              },
+                              "formKey": {
+                                "type": "string"
+                              },
+                              "formVersion": {
+                                "type": "string"
+                              },
+                              "formData": {
+                                "type": "object",
+                                "properties": {
+                                  "value": {
+                                    "type": "object",
+                                    "properties": {
+                                      "l0g53mazm2c4bnm6": {
+                                        "type": "string"
+                                      },
+                                      "l0g53wqcx9uvjofi": {
+                                        "type": "string"
+                                      },
+                                      "l0g543xv2942hsfn": {
+                                        "type": "integer"
+                                      },
+                                      "l0g5496xkq8yvxlc": {
+                                        "type": "integer"
+                                      },
+                                      "l0g54i94a7vi7lz9": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "required": [
+                                      "l0g53mazm2c4bnm6",
+                                      "l0g53wqcx9uvjofi",
+                                      "l0g543xv2942hsfn",
+                                      "l0g5496xkq8yvxlc",
+                                      "l0g54i94a7vi7lz9"
+                                    ]
+                                  },
+                                  "empty": {
+                                    "type": "string"
+                                  },
+                                  "present": {
+                                    "type": "string"
+                                  },
+                                  "notEmpty": {
+                                    "type": "string"
+                                  },
+                                  "notPresent": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "value",
+                                  "empty",
+                                  "present",
+                                  "notEmpty",
+                                  "notPresent"
+                                ]
+                              },
+                              "operatorId": {
+                                "type": "string"
+                              },
+                              "operatorName": {
+                                "type": "string",
+                                "description": "上报人"
+                              },
+                              "operateTime": {
+                                "type": "string",
+                                "description": "上报时间"
+                              },
+                              "creatorId": {
+                                "type": "string"
+                              },
+                              "creatorName": {
+                                "type": "string"
+                              },
+                              "createTime": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "infoId",
+                              "orgId",
+                              "formKey",
+                              "formVersion",
+                              "formData",
+                              "operatorId",
+                              "operatorName",
+                              "operateTime",
+                              "creatorId",
+                              "creatorName",
+                              "createTime",
+                              "orgName"
+                            ]
+                          }
+                        },
+                        "pageNum": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "startRow": {
+                          "type": "integer"
+                        },
+                        "endRow": {
+                          "type": "integer"
+                        },
+                        "pages": {
+                          "type": "integer"
+                        },
+                        "prePage": {
+                          "type": "integer"
+                        },
+                        "nextPage": {
+                          "type": "integer"
+                        },
+                        "isFirstPage": {
+                          "type": "string"
+                        },
+                        "isLastPage": {
+                          "type": "string"
+                        },
+                        "hasPreviousPage": {
+                          "type": "string"
+                        },
+                        "hasNextPage": {
+                          "type": "string"
+                        },
+                        "navigatePages": {
+                          "type": "integer"
+                        },
+                        "navigatepageNums": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "navigateFirstPage": {
+                          "type": "integer"
+                        },
+                        "navigateLastPage": {
+                          "type": "integer"
+                        },
+                        "lastPage": {
+                          "type": "integer"
+                        },
+                        "firstPage": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "list",
+                        "pageNum",
+                        "pageSize",
+                        "size",
+                        "startRow",
+                        "endRow",
+                        "pages",
+                        "prePage",
+                        "nextPage",
+                        "isFirstPage",
+                        "isLastPage",
+                        "hasPreviousPage",
+                        "hasNextPage",
+                        "navigatePages",
+                        "navigatepageNums",
+                        "navigateFirstPage",
+                        "navigateLastPage",
+                        "lastPage",
+                        "firstPage"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/ueditor/upload": {
+      "post": {
+        "summary": "上传富文本文件",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sendResetPwdVerifyCode": {
+      "get": {
+        "summary": "发送验证码",
+        "x-apifox-folder": "局端登录/重置密码（basic模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "局端登录/重置密码（basic模块）"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "description": "手机号码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/add": {
+      "post": {
+        "summary": "新增笔记",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "标题"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "内容"
+                  },
+                  "noteBookId": {
+                    "type": "integer",
+                    "description": "笔记本id"
+                  },
+                  "attachments": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "附件id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "附件名称"
+                        }
+                      }
+                    },
+                    "description": "附件"
+                  },
+                  "noteId": {
+                    "type": "string",
+                    "description": "笔记id"
+                  }
+                },
+                "required": [
+                  "title",
+                  "content",
+                  "noteBookId",
+                  "attachments",
+                  "noteId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "标题"
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "内容"
+                    },
+                    "noteBookId": {
+                      "type": "integer",
+                      "description": "笔记本id"
+                    },
+                    "attachments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "附件id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "附件名称"
+                          }
+                        }
+                      },
+                      "description": "附件"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "content",
+                    "noteBookId",
+                    "attachments"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/nextId": {
+      "get": {
+        "summary": "获取笔记id",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number",
+                  "description": "笔记id"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/update": {
+      "post": {
+        "summary": "修改笔记",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "noteId": {
+                    "type": "integer",
+                    "description": "笔记id"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "标题"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "内容"
+                  },
+                  "noteBookId": {
+                    "type": "integer",
+                    "description": "笔记本id"
+                  },
+                  "attachments": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "附件id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "附件名称"
+                        }
+                      }
+                    },
+                    "description": "附件"
+                  }
+                },
+                "required": [
+                  "noteId",
+                  "title",
+                  "content",
+                  "noteBookId",
+                  "attachments"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/delete/{noteId}": {
+      "post": {
+        "summary": "删除笔记",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteId",
+            "in": "path",
+            "description": "笔记id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/courseadjustment/export": {
+      "get": {
+        "summary": "全部导出",
+        "x-apifox-folder": "调课/代课（timetablenew模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "调课/代课（timetablenew模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "类型 1：节假日调课 2：日常调课 3：日常代课 0：全部类型  ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/removeCert": {
+      "post": {
+        "summary": "删除指定证明",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certId": {
+                    "type": "integer",
+                    "description": "证明id"
+                  }
+                },
+                "required": [
+                  "certId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "null"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{orgId}/notes/{noteId}": {
+      "get": {
+        "summary": "笔记详情",
+        "x-apifox-folder": "教学笔记（note模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教学笔记（note模块）"
+        ],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "单位id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteId",
+            "in": "path",
+            "description": "笔记id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "noteId": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "attachment": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "orgId": {
+                          "type": "string"
+                        },
+                        "noteBookId": {
+                          "type": "string"
+                        },
+                        "updateTime": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "noteId",
+                        "title",
+                        "content",
+                        "attachment",
+                        "userId",
+                        "orgId",
+                        "noteBookId",
+                        "updateTime"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/queryCert": {
+      "get": {
+        "summary": "查询具体证明",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [
+          {
+            "name": "certId",
+            "in": "query",
+            "description": "证明id",
+            "required": true,
+            "example": "9527",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "certId": {
+                          "type": "integer",
+                          "description": "证明单号"
+                        },
+                        "type": {
+                          "type": "integer",
+                          "description": "证明类型 1:就读证明 2:获奖证明 3:毕业证明 4:其他证明"
+                        },
+                        "stuName": {
+                          "type": "string",
+                          "description": "学生姓名"
+                        },
+                        "sex": {
+                          "type": "integer",
+                          "description": "性别 1:男 2:女"
+                        },
+                        "idcard": {
+                          "type": "string",
+                          "description": "身份证号"
+                        },
+                        "stuGrade": {
+                          "type": "string",
+                          "description": "年级"
+                        },
+                        "stuClass": {
+                          "type": "string",
+                          "description": "班级"
+                        },
+                        "stuNo": {
+                          "type": "string",
+                          "description": "学号"
+                        },
+                        "mark": {
+                          "type": "string",
+                          "description": "说明(所有证明都有的字段)"
+                        },
+                        "startDate": {
+                          "type": "string",
+                          "description": "起始日期(就业证明独有)"
+                        },
+                        "endDate": {
+                          "type": "string",
+                          "description": "截止日期(就业证明独有)"
+                        },
+                        "schoolName": {
+                          "type": "string",
+                          "description": "毕业学校(毕业证明独有)"
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "毕业日期(毕业证明) 或 获奖日期(获奖证明)"
+                        },
+                        "prizeName": {
+                          "type": "string",
+                          "description": "奖项名称(获奖证明独有)"
+                        }
+                      },
+                      "required": [
+                        "certId",
+                        "type",
+                        "stuName",
+                        "sex",
+                        "idcard",
+                        "stuGrade",
+                        "stuClass",
+                        "stuNo",
+                        "mark",
+                        "startDate",
+                        "endDate",
+                        "schoolName",
+                        "date",
+                        "prizeName"
+                      ]
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certmanage/addOrModifyAttendCert": {
+      "post": {
+        "summary": "新增或修改就读证明",
+        "x-apifox-folder": "证明管理（cert模块）",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "证明管理（cert模块）"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certId": {
+                    "type": "integer",
+                    "description": "证明单号，不为空就是修改",
+                    "nullable": true
+                  },
+                  "stuName": {
+                    "type": "string",
+                    "description": "学生姓名"
+                  },
+                  "sex": {
+                    "type": "integer",
+                    "description": "性别 1:男 2:女"
+                  },
+                  "idcard": {
+                    "type": "string",
+                    "description": "身份证号"
+                  },
+                  "stuGrade": {
+                    "type": "string",
+                    "description": "年级"
+                  },
+                  "stuClass": {
+                    "type": "string",
+                    "description": "班级"
+                  },
+                  "stuNo": {
+                    "type": "string",
+                    "description": "学号"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "description": "起始日期"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "description": "截止日期"
+                  },
+                  "mark": {
+                    "type": "string",
+                    "description": "备注说明",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "certId",
+                  "stuName",
+                  "sex",
+                  "idcard",
+                  "stuGrade",
+                  "stuClass",
+                  "stuNo",
+                  "startDate",
+                  "endDate",
+                  "mark"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "null"
+                    },
+                    "error": {
+                      "type": "null"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "context",
+                    "status",
+                    "message",
+                    "error",
+                    "timestamp"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
