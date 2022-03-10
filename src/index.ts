@@ -11,8 +11,6 @@ program
   .requiredOption('-u, --url <url>', 'apifox OpenAPI 请求地址')
   .option('-js', '是否是js代码')
   .action((options: any) => {
-    console.log('参数：', options);
-
     if (options.Js) {
       GenJs(options.url);
     } else {
@@ -21,4 +19,3 @@ program
   });
 
 program.parse(process.argv);
-console.log('over!');

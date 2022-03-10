@@ -4,7 +4,6 @@ import { Gen } from './Gen';
 // const fs = require('fs-extra');
 export default async function (url: string) {
   let res = await axios.get(url);
-  console.log('tss', res.data);
   if (res.status == 200) {
     Gen(res.data);
   }
