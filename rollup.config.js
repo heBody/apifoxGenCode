@@ -18,7 +18,7 @@ const builds = {
   'cjs-dev': {
     outFile: 'apifox-gencode.js',
     format: 'cjs',
-    mode: 'development',
+    mode: 'production',
   },
   // 'cjs-prod': {
   //   outFile: 'apifox-gencode.common.prod.js',

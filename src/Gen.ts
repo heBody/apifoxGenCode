@@ -81,7 +81,7 @@ function outputCode(list: ApiTemplate[]) {
       };`;
     }
 
-    console.log('文件：', template.fileName, fStr);
+    console.log('outfile：', template.fileName);
     fs.outputFile(`./.out/${template.fileName}`, fStr);
   }
 }

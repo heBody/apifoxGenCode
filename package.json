@@ -1,7 +1,6 @@
 {
-  "private": true,
   "name": "apifoxgencode",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "apifox gen code",
   "main": "dist/apifox-gencode.js",
   "bin": {
@@ -34,7 +33,7 @@
     "gen code"
   ],
   "author": "heshuaibiao",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.2",
     "@rollup/plugin-json": "^4.1.0",
